@@ -8891,6 +8891,12 @@ html[data-theme="dark"] .receipt-hero-amount {
 .lens2-name { font-weight: 600; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .lens2-detail { color: var(--text-3); text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .lens2-sources { margin: 0; font-size: 12px; color: var(--text-3); }
+.lens2-pie { display: flex; align-items: center; gap: 18px; }
+.lens2-pie svg { width: 120px; height: 120px; flex: none; }
+.lens2-pie-total { font-size: 7px; font-weight: 650; fill: var(--text); }
+.lens2-pie-legend { list-style: none; margin: 0; padding: 0; flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 7px; }
+.lens2-pie-legend li { display: grid; grid-template-columns: 10px minmax(0, 1fr) auto; align-items: center; gap: 8px; font-size: 12.5px; }
+.lens2-pie-dot { width: 10px; height: 10px; border-radius: 3px; }
 @media (max-width: 860px) { .lens2-grid { grid-template-columns: 1fr; } }
 
 /* Kickoff: one box, one button, one dated plan. */
