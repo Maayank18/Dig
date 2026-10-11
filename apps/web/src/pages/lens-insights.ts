@@ -16,6 +16,8 @@ export interface LensSection {
   /** One plain sentence: what the numbers mean for you. */
   takeaway: string;
   bars?: LensBar[];
+  /** Draw the bars as a pie: one per kind of list, on a section whose parts make a whole. */
+  chart?: "pie";
   names?: Array<{ name: string; detail?: string }>;
 }
 
@@ -239,6 +241,7 @@ function sponsorSections(records: DatasetRecord[], outreach: Record<string, Mark
       title: "Sponsorship tiers",
       takeaway: tiers[0] ? `Most common: ${tiers[0].label.toLowerCase()} (${tiers[0].count}).` : "No sponsorship tier was written on the pages found.",
       bars: tiers,
+      chart: "pie",
     },
     contactQualitySection(records),
   );
@@ -281,6 +284,7 @@ function judgeSections(records: DatasetRecord[]): LensSection[] {
         { label: "Industry (likely)", count: industry },
         { label: "Affiliation unknown", count: unknown },
       ],
+      chart: "pie",
     },
     {
       id: "reach",
@@ -312,6 +316,7 @@ function jobSections(records: DatasetRecord[]): LensSection[] {
       title: "Remote, hybrid or on-site",
       takeaway: `${remote} of ${records.length} roles are remote.`,
       bars: modes,
+      chart: "pie",
     },
     {
       id: "companies",
@@ -346,7 +351,7 @@ function leadSections(records: DatasetRecord[], outreach: Record<string, Mark>):
       bars: segments.bars,
       names: segments.names,
     },
-    contactQualitySection(records),
+    { ...contactQualitySection(records), chart: "pie" },
     {
       id: "next",
       title: "Best leads to contact next",
@@ -368,6 +373,12 @@ function competitorSections(records: DatasetRecord[]): LensSection[] {
       takeaway: priced.length
         ? `${priced.length} of ${records.length} competitors have a price written on a page; ${free} mention a free plan.`
         : "No prices were written on the pages found.",
+      bars: [
+        { label: "Mentions a free plan", count: free },
+        { label: "Price shown, no free plan", count: priced.length - free },
+        { label: "No price found", count: records.length - priced.length },
+      ],
+      chart: "pie",
       names: priced.slice(0, 8).map((record) => ({ name: nameOf(record), detail: clip(record.fields.pricing_signal ?? "", 48) })),
     },
     {
