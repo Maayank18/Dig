@@ -679,6 +679,17 @@ export function AskDiglett() {
         >
           {/* macOS Styled Window Titlebar */}
           <div className="diglett-macos-titlebar">
+            <div className="diglett-traffic-lights" aria-label="Window controls">
+              <Tip text="Close Diglett (Esc)">
+                <button type="button" className="diglett-dot red" onClick={() => setOpen(false)} aria-label="Close" />
+              </Tip>
+              <Tip text={expanded ? "Compact view" : "Minimize"}>
+                <button type="button" className="diglett-dot yellow" onClick={() => setExpanded(false)} aria-label="Minimize" />
+              </Tip>
+              <Tip text={expanded ? "Compact view" : "Expand view"}>
+                <button type="button" className="diglett-dot green" onClick={() => setExpanded((v) => !v)} aria-label="Expand view" />
+              </Tip>
+            </div>
             <div className="diglett-title-center">
               <img src="/art/mole-avatar.png" alt="Diglett" className="diglett-header-avatar" />
               <span className="diglett-title-text">Diglett</span>

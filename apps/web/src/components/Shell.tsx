@@ -1,6 +1,6 @@
 import { Archive, ChevronLeft, ChevronRight, Clock, CreditCard, Folder, LogOut, Moon, MoreHorizontal, Search, Star, Sun, User } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEvents } from "../events";
 import { NAV_HELP } from "../help";
 import { Tip } from "./Tip";
@@ -50,15 +50,143 @@ export function AppWindow(props: {
   children: ReactNode;
 }) {
   const navigate = useNavigate();
+  const location = useLocation();
   const [theme, setTheme] = useAppearance();
+  const [minimized, setMinimized] = useState(false);
   const showSidebar = props.sidebar !== false;
   // React Router numbers in-app history entries; at 0 there is nothing in Dig to go back to.
   const historyIndex = (window.history.state as { idx?: number } | null)?.idx ?? 0;
+
+  const handleClose = () => {
+    if (location.pathname !== "/dashboard") {
+      navigate("/dashboard");
+    } else {
+      navigate("/");
+    }
+  };
+
+  const handleMinimize = () => {
+    setMinimized((prev) => !prev);
+  };
+
+  const handleZoom = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen?.().catch(() => {});
+    } else {
+      document.exitFullscreen?.().catch(() => {});
+    }
+  };
+
+  if (minimized) {
+    return (
+      <div className="desk desk-minimized">
+        <div
+          className="minimized-dock-card"
+          onClick={() => setMinimized(false)}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") setMinimized(false);
+          }}
+          aria-label="Dig App Window (Minimized) - Click to restore"
+        >
+          <div className="window-traffic-lights" onClick={(e) => e.stopPropagation()}>
+            <Tip text={NAV_HELP.close}>
+              <button
+                type="button"
+                className="window-dot red"
+                onClick={() => {
+                  setMinimized(false);
+                  handleClose();
+                }}
+                aria-label="Close"
+              >
+                <svg width="6" height="6" viewBox="0 0 8 8">
+                  <path d="M1.5 1.5l5 5m0-5l-5 5" stroke="rgba(0,0,0,0.7)" strokeWidth="1.3" strokeLinecap="round" />
+                </svg>
+              </button>
+            </Tip>
+            <Tip text={NAV_HELP.minimize}>
+              <button
+                type="button"
+                className="window-dot yellow"
+                onClick={() => setMinimized(false)}
+                aria-label="Restore window"
+              >
+                <svg width="6" height="6" viewBox="0 0 8 8">
+                  <path d="M1.5 4h5" stroke="rgba(0,0,0,0.7)" strokeWidth="1.3" strokeLinecap="round" />
+                </svg>
+              </button>
+            </Tip>
+            <Tip text={NAV_HELP.zoom}>
+              <button
+                type="button"
+                className="window-dot green"
+                onClick={handleZoom}
+                aria-label="Full screen zoom"
+              >
+                <svg width="6" height="6" viewBox="0 0 8 8">
+                  <path d="M1.5 5.5l5-5m-4 0h4v4m-1 3.5h-4v-4" stroke="rgba(0,0,0,0.7)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+            </Tip>
+          </div>
+          <div className="minimized-dock-content">
+            <span className="minimized-dock-badge">DIG</span>
+            <span className="minimized-dock-title">
+              {props.crumbs[props.crumbs.length - 1]?.label ?? "Workspace"}
+            </span>
+            <span className="minimized-dock-sub">Minimized &bull; Click to restore</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="desk">
       <div className="window">
         <div className="titlebar">
-          {showSidebar && <div className="titlebar-gap" aria-hidden />}
+          <div className={`titlebar-leading ${showSidebar ? "with-sidebar" : ""}`}>
+            <div className="window-traffic-lights" aria-label="Window controls">
+              <Tip text={NAV_HELP.close}>
+                <button
+                  type="button"
+                  className="window-dot red"
+                  onClick={handleClose}
+                  aria-label="Close window"
+                >
+                  <svg width="6" height="6" viewBox="0 0 8 8">
+                    <path d="M1.5 1.5l5 5m0-5l-5 5" stroke="rgba(0,0,0,0.7)" strokeWidth="1.3" strokeLinecap="round" />
+                  </svg>
+                </button>
+              </Tip>
+              <Tip text={NAV_HELP.minimize}>
+                <button
+                  type="button"
+                  className="window-dot yellow"
+                  onClick={handleMinimize}
+                  aria-label="Minimize window"
+                >
+                  <svg width="6" height="6" viewBox="0 0 8 8">
+                    <path d="M1.5 4h5" stroke="rgba(0,0,0,0.7)" strokeWidth="1.3" strokeLinecap="round" />
+                  </svg>
+                </button>
+              </Tip>
+              <Tip text={NAV_HELP.zoom}>
+                <button
+                  type="button"
+                  className="window-dot green"
+                  onClick={handleZoom}
+                  aria-label="Full screen zoom"
+                >
+                  <svg width="6" height="6" viewBox="0 0 8 8">
+                    <path d="M1.5 5.5l5-5m-4 0h4v4m-1 3.5h-4v-4" stroke="rgba(0,0,0,0.7)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+              </Tip>
+            </div>
+          </div>
           <div className="nav-arrows">
             <Tip text={NAV_HELP.back}>
               <button onClick={() => navigate(-1)} aria-label="Back" disabled={historyIndex === 0}>

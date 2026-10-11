@@ -691,6 +691,17 @@ function UpiPaymentModal({ plan, billingCycle, onClose, onSuccess }: UpiPaymentM
       >
         {/* macOS authentic window titlebar */}
         <div className="macos-titlebar">
+          <div className="macos-traffic-lights" aria-label="Window controls">
+            <Tip text="Close (Esc)">
+              <button type="button" className="macos-dot red" onClick={onClose} aria-label="Close" />
+            </Tip>
+            <Tip text="Minimize">
+              <button type="button" className="macos-dot yellow" onClick={onClose} aria-label="Minimize" />
+            </Tip>
+            <Tip text="Zoom">
+              <button type="button" className="macos-dot green" aria-label="Zoom" />
+            </Tip>
+          </div>
           <div className="macos-titlebar-heading" id="macos-modal-title">
             <Lock size={12} className="macos-lock-icon" />
             <span>Pay with UPI</span>

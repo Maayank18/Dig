@@ -33,6 +33,9 @@ export const NAV_HELP = {
   light: "Switch to the light look.",
   dark: "Switch to the dark look.",
   avatar: "Open your profile.",
+  close: "Close and return to your dashboard.",
+  minimize: "Minimize window.",
+  zoom: "Toggle full screen.",
 } as const;
 
 /** The four tools, worded the same in the sidebar, the Toolkit page and the intro pop-up. */
