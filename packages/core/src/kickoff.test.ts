@@ -4,7 +4,7 @@ import { cleanKickoffPlan, kickoffUserMessage } from "./kickoff.js";
 const today = new Date("2026-09-15T09:00:00Z");
 
 const draft = {
-  eventName: "Northstar Hackathon",
+  eventName: "Code Cubicle 7.0",
   eventDate: "2026-10-10",
   summary: "25 days left. Sponsors and venue first.",
   assumptions: ["About 300 students", ""],
@@ -27,7 +27,7 @@ const draft = {
 describe("cleanKickoffPlan", () => {
   it("keeps a usable plan and works out the days left", () => {
     const plan = cleanKickoffPlan(draft, today)!;
-    expect(plan).toMatchObject({ eventName: "Northstar Hackathon", eventDate: "2026-10-10", today: "2026-09-15", daysLeft: 25, urgent: true });
+    expect(plan).toMatchObject({ eventName: "Code Cubicle 7.0", eventDate: "2026-10-10", today: "2026-09-15", daysLeft: 25, urgent: true });
     expect(plan.assumptions).toEqual(["About 300 students"]);
     expect(plan.phases).toHaveLength(1);
   });
@@ -60,7 +60,7 @@ describe("kickoffUserMessage", () => {
     const message = kickoffUserMessage({
       today,
       request: "It moved to 10 Oct. No sponsors yet.",
-      event: { name: "Northstar Hackathon", date: "10 Oct", description: "AI hackathon", targets: "15 sponsors" },
+      event: { name: "Code Cubicle 7.0", date: "10 Oct", description: "AI hackathon", targets: "15 sponsors" },
     });
     expect(message).toContain("Today is 2026-09-15 (Tuesday).");
     expect(message).toContain("- date as written: 10 Oct");

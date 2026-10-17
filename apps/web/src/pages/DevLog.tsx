@@ -47,46 +47,46 @@ function Sprite({ name, height }: { name: SpriteName; height: number }) {
   );
 }
 
-type Side = "left" | "right";
+type Who = "Mayank" | "Ashima";
 type Item =
-  | { kind: "entry"; side: Side; at: string; text: string }
+  | { kind: "entry"; who: Who; at: string; text: string }
   | { kind: "break"; sprite: SpriteName; title: string; line: string };
 
 const COFFEE: Item = { kind: "break", sprite: "coffee", title: "[ 8-bit Coffee Break ]", line: "Refueling algorithms & testing speech models..." };
-const entry = (side: Side, at: string, text: string): Item => ({ kind: "entry", side, at, text });
+const entry = (who: Who, at: string, text: string): Item => ({ kind: "entry", who, at, text });
 
 const LOG: Item[] = [
-  entry("left", "Sep 25, 2026 · 09:15 AM", "scaffolded the monorepo — apps/api, apps/web, packages/core. basic Express + SQLite up."),
-  entry("right", "Sep 25, 2026 · 11:30 AM", "wrote the intent definitions — SPONSOR_LOOKUP, JOB_LOOKUP, the rest. keyword-based matching for now."),
-  entry("left", "Sep 25, 2026 · 02:50 PM", "pipeline stages wired: collect → normalize → dedupe → validate → rank. all still running on demo data."),
+  entry("Mayank", "Sep 25, 2026 · 09:15 AM", "scaffolded the monorepo — apps/api, apps/web, packages/core. basic Express + SQLite up."),
+  entry("Ashima", "Sep 25, 2026 · 11:30 AM", "wrote the intent definitions — SPONSOR_LOOKUP, JOB_LOOKUP, the rest. keyword-based matching for now."),
+  entry("Mayank", "Sep 25, 2026 · 02:50 PM", "pipeline stages wired: collect → normalize → dedupe → validate → rank. all still running on demo data."),
   COFFEE,
-  entry("right", "Sep 25, 2026 · 06:10 PM", "built the grounding rule — every field has to be a literal match to its source text. no exceptions, even if it means fewer results."),
+  entry("Ashima", "Sep 25, 2026 · 06:10 PM", "built the grounding rule — every field has to be a literal match to its source text. no exceptions, even if it means fewer results."),
   entry(
-    "left",
+    "Mayank",
     "Sep 25, 2026 · 09:45 PM",
     "conflict resolution is live — when two sources disagree, it checks which one’s more recent and more authoritative. confident enough, it decides on its own. not confident, it leaves it for us to call.",
   ),
-  entry("right", "Sep 26, 2026 · 12:20 AM", "first live test: single Tavily search + one LLM call. found real sponsors off one Devfolio page. slow but it’s real data."),
-  entry("left", "Sep 26, 2026 · 03:00 AM", "tried scaling it up — multi-hop: find events, then extract sponsors per event, then enrich contacts. sounds right on paper."),
+  entry("Ashima", "Sep 26, 2026 · 12:20 AM", "first live test: single Tavily search + one LLM call. found real sponsors off one Devfolio page. slow but it’s real data."),
+  entry("Mayank", "Sep 26, 2026 · 03:00 AM", "tried scaling it up — multi-hop: find events, then extract sponsors per event, then enrich contacts. sounds right on paper."),
   { kind: "break", sprite: "nap", title: "[ Power Nap ]", line: "Recompiling brain cells between commits..." },
-  entry("right", "Sep 26, 2026 · 08:30 AM", "multi-hop is live. 8 events found... 1 sponsor extracted total. something’s badly wrong."),
-  entry("left", "Sep 26, 2026 · 11:15 AM", "found it — the search extraction doesn’t work on JS-heavy pages. Unstop and Devfolio were returning nothing."),
-  entry("right", "Sep 26, 2026 · 02:40 PM", "patched around it, widened the search. ran it again — full job failure this time. rate limited into the ground."),
-  entry("left", "Sep 26, 2026 · 05:20 PM", "wrapped every step so one failure can’t sink the whole job. stops the crash. doesn’t fix the real problem."),
+  entry("Ashima", "Sep 26, 2026 · 08:30 AM", "multi-hop is live. 8 events found... 1 sponsor extracted total. something’s badly wrong."),
+  entry("Mayank", "Sep 26, 2026 · 11:15 AM", "found it — the search extraction doesn’t work on JS-heavy pages. Unstop and Devfolio were returning nothing."),
+  entry("Ashima", "Sep 26, 2026 · 02:40 PM", "patched around it, widened the search. ran it again — full job failure this time. rate limited into the ground."),
+  entry("Mayank", "Sep 26, 2026 · 05:20 PM", "wrapped every step so one failure can’t sink the whole job. stops the crash. doesn’t fix the real problem."),
   { kind: "break", sprite: "kitkat", title: "[ Snack Break ]", line: "{ status: 'compiling', patience: 'depleting' }" },
-  entry("left", "Sep 27, 2026 · 12:45 AM", "rebuild’s live. first real run: 111 sponsors, 63 seconds, every field grounded. audited 371 field values — zero ungrounded."),
-  entry("right", "Sep 27, 2026 · 09:30 AM", "started the frontend for real — Landing, Dashboard, Event Folder, Job Board, all wired to the live API instead of mocks."),
-  entry("left", "Sep 27, 2026 · 02:15 PM", "Job Board’s done — real dataset, real conflicts, Keep new/Keep previous actually calls the API. tested it end to end myself."),
+  entry("Mayank", "Sep 27, 2026 · 12:45 AM", "rebuild’s live. first real run: 111 sponsors, 63 seconds, every field grounded. audited 371 field values — zero ungrounded."),
+  entry("Ashima", "Sep 27, 2026 · 09:30 AM", "started the frontend for real — Landing, Dashboard, Event Folder, Job Board, all wired to the live API instead of mocks."),
+  entry("Mayank", "Sep 27, 2026 · 02:15 PM", "Job Board’s done — real dataset, real conflicts, Keep new/Keep previous actually calls the API. tested it end to end myself."),
   entry(
-    "right",
+    "Ashima",
     "Sep 27, 2026 · 07:50 PM",
     "caught a data bug — re-running a job was throwing 37 conflicts, almost all of them just “Co-Sponsor” vs “Co-Sponsors.” normalized the comparison. down to 5 real ones.",
   ),
-  entry("left", "Sep 27, 2026 · 11:30 PM", "landing page and Why Dig page built out — full copy, the gem orbit, all the animations. flipped demo mode off, live data by default now."),
+  entry("Mayank", "Sep 27, 2026 · 11:30 PM", "landing page and Why Dig page built out — full copy, the gem orbit, all the animations. flipped demo mode off, live data by default now."),
   COFFEE,
-  entry("right", "Sep 28, 2026 · 02:10 AM", "old conflicts were resurfacing on every re-run. fixed it — superseded properly now, nothing repeats."),
-  entry("left", "Sep 28, 2026 · 03:15 AM", "going through everything we half-built and finishing it properly — profile page, delete on records, the help widget."),
-  entry("right", "Sep 28, 2026 · 04:00 AM", "last stretch — Dev Log, the Stack page, a real usage guide, README updated. splitting - it’s all done before the sun’s up."),
+  entry("Ashima", "Sep 28, 2026 · 02:10 AM", "old conflicts were resurfacing on every re-run. fixed it — superseded properly now, nothing repeats."),
+  entry("Mayank", "Sep 28, 2026 · 03:15 AM", "going through everything we half-built and finishing it properly — profile page, delete on records, the help widget."),
+  entry("Ashima", "Sep 28, 2026 · 04:00 AM", "last stretch — Dev Log, the Stack page, a real usage guide, README updated. splitting - it’s all done before the sun’s up."),
 ];
 
 export function DevLog() {
@@ -136,12 +136,13 @@ export function DevLog() {
               </Reveal>
             );
           }
-          const side = item.side;
+          const side = item.who === "Mayank" ? "left" : "right";
           return (
             <Reveal key={index} className={`log-entry ${side}`}>
-              <img className="log-avatar" src={`/art/devlog/avatar-${side === "left" ? "mayank" : "ashima"}.png`} alt="" />
+              <img className="log-avatar" src={`/art/devlog/avatar-${item.who.toLowerCase()}.png`} alt={item.who} />
               <div className="log-body">
                 <div className="log-meta">
+                  <b>{item.who}</b>
                   <span>{item.at}</span>
                 </div>
                 <p className="log-bubble">{item.text}</p>

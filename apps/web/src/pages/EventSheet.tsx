@@ -30,7 +30,7 @@ export function EventSheet(props: {
       <form className="sheet" onSubmit={submit} onClick={(event) => event.stopPropagation()}>
         <h3>{props.title}</h3>
         <label>Event name</label>
-        <input autoFocus value={values.name} onChange={set("name")} placeholder="Campus Hackathon" />
+        <input autoFocus value={values.name} onChange={set("name")} placeholder="Code Cubicle 7.0" />
         <label>Description</label>
         <textarea rows={2} value={values.description} onChange={set("description")} placeholder="What is this event?" />
         <label>Event date</label>

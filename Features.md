@@ -320,4 +320,4 @@ Dig maintains strict engineering integrity regarding what is live versus what is
 
 ---
 
-*Authored with precision by the Dig Core Team*
+*Authored with precision by the Dig Core Team · Built for Code Cubicle 6.0*
