@@ -131,7 +131,7 @@ export const DEFAULT_GATEWAY_SETTINGS: CustomGatewaySettings = {
   email: {
     mode: "system",
     fromAddress: "outreach@dig.ai",
-    senderName: "Mayank Garg",
+    senderName: "Dig",
     googleClientId: "",
     googleClientSecret: "",
     googleRefreshToken: "",
@@ -155,9 +155,9 @@ export const DEFAULT_GATEWAY_SETTINGS: CustomGatewaySettings = {
   },
   linkedin: {
     mode: "system",
-    senderName: "Mayank Garg",
+    senderName: "Dig",
     senderTitle: "Founder & CEO",
-    profileUrl: "https://linkedin.com/in/mayank-garg",
+    profileUrl: "https://www.linkedin.com/in/",
     accessToken: "",
     clientId: "",
   },
@@ -578,7 +578,7 @@ function DigNode({ data, selected }: NodeProps<Node<FlowNodeData>>) {
   const previewBody =
     evaluateTemplate(data.config?.body as string) ||
     (data.kind === "email"
-      ? `Hi ${previewName},\n\nReaching out regarding ${previewCompany} — we'd love to connect and share more about collaboration opportunities.\n\nBest regards,\nMayank Garg`
+      ? `Hi ${previewName},\n\nReaching out regarding ${previewCompany} — we'd love to connect and share more about collaboration opportunities.\n\nBest regards,\nDig`
       : data.kind === "whatsapp"
       ? `Hello ${previewName}, reaching out regarding ${previewCompany}. Let us know if you'd be open to a brief chat!`
       : `Hi ${previewName}, I came across your work at ${previewCompany} and would love to connect here on LinkedIn!`);
@@ -2286,11 +2286,11 @@ function defaultConfig(kind: string, jobId = ""): FlowNodeData["config"] {
     return {
       kind,
       from: "outreach@dig.ai",
-      senderName: "Mayank Garg",
+      senderName: "Dig",
       provider: "Resend API (api.resend.com)",
       to: "{{record.email}}",
       subject: "Partnership Opportunity for {{record.company}}",
-      body: "Hi {{record.name}},\n\nReaching out regarding {{record.company}} — we'd love to connect and share more about collaboration opportunities.\n\nBest regards,\nMayank Garg | Partnerships",
+      body: "Hi {{record.name}},\n\nReaching out regarding {{record.company}} — we'd love to connect and share more about collaboration opportunities.\n\nBest regards,\nDig | Partnerships",
     };
   if (kind === "whatsapp")
     return {
@@ -2305,8 +2305,8 @@ function defaultConfig(kind: string, jobId = ""): FlowNodeData["config"] {
   if (kind === "linkedin")
     return {
       kind,
-      from: "Mayank Garg (Founder & CEO)",
-      senderName: "Mayank Garg",
+      from: "Dig (Founder & CEO)",
+      senderName: "Dig",
       provider: "LinkedIn Official Partner API",
       to: "{{record.company}}",
       subject: "Connecting with {{record.name}}",
@@ -2498,9 +2498,9 @@ function NodeFields({
       ? "outreach@dig.ai"
       : isWhatsApp
       ? "+1 (555) 019-2834 (Verified WABA)"
-      : "Mayank Garg (Founder & CEO)";
+      : "Dig (Founder & CEO)";
 
-    const defaultSenderName = isEmail ? "Mayank Garg" : isWhatsApp ? "Dig Outreach Concierge" : "Mayank Garg";
+    const defaultSenderName = isEmail ? "Dig" : isWhatsApp ? "Dig Outreach Concierge" : "Dig";
 
     const providerOptions = isEmail
       ? [
@@ -2674,12 +2674,12 @@ function DispatchConfirmModal({
     : String(emailNode?.config.from || "outreach@dig.ai");
   const initialEmailSender = gateways.email.mode !== "system" && gateways.email.senderName
     ? gateways.email.senderName
-    : String(emailNode?.config.senderName || "Mayank Garg");
+    : String(emailNode?.config.senderName || "Dig");
   const emailProvider = String(emailNode?.config.provider || "Resend API (api.resend.com)");
   const initialEmailSubject = interpolateVal(emailNode?.config.subject || "Partnership Opportunity for {{record.company}}");
   const initialEmailBody = interpolateVal(
     emailNode?.config.body ||
-      "Hi {{record.name}},\n\nReaching out regarding {{record.company}} — we'd love to connect and share more about collaboration opportunities.\n\nBest regards,\nMayank Garg | Partnerships"
+      "Hi {{record.name}},\n\nReaching out regarding {{record.company}} — we'd love to connect and share more about collaboration opportunities.\n\nBest regards,\nDig | Partnerships"
   );
 
   const initialWhatsappFrom = gateways.whatsapp.mode === "twilio" && (gateways.whatsapp.twilioSenderNumber || gateways.whatsapp.fromNumber)
@@ -2697,11 +2697,11 @@ function DispatchConfirmModal({
   );
 
   const initialLinkedinFrom = gateways.linkedin.mode === "profile" && gateways.linkedin.senderTitle
-    ? `${gateways.linkedin.senderName || "Mayank Garg"} (${gateways.linkedin.senderTitle})`
-    : String(linkedinNode?.config.from || "Mayank Garg (Founder & CEO)");
+    ? `${gateways.linkedin.senderName || "Dig"} (${gateways.linkedin.senderTitle})`
+    : String(linkedinNode?.config.from || "Dig (Founder & CEO)");
   const initialLinkedinSender = gateways.linkedin.mode !== "system" && gateways.linkedin.senderName
     ? gateways.linkedin.senderName
-    : String(linkedinNode?.config.senderName || "Mayank Garg");
+    : String(linkedinNode?.config.senderName || "Dig");
   const linkedinProvider = String(linkedinNode?.config.provider || "LinkedIn Official Partner API");
   const initialLinkedinBody = interpolateVal(
     linkedinNode?.config.body ||
@@ -2745,7 +2745,7 @@ function DispatchConfirmModal({
     setWhatsappBody(initialWhatsappBody);
 
     if (loaded.linkedin.mode === "profile") {
-      setLinkedinFrom(`${loaded.linkedin.senderName || "Mayank Garg"} (${loaded.linkedin.senderTitle || "Founder & CEO"})`);
+      setLinkedinFrom(`${loaded.linkedin.senderName || "Dig"} (${loaded.linkedin.senderTitle || "Founder & CEO"})`);
       if (loaded.linkedin.senderName) setLinkedinSender(loaded.linkedin.senderName);
     } else {
       setLinkedinFrom(initialLinkedinFrom);
@@ -2806,10 +2806,10 @@ function DispatchConfirmModal({
     }
 
     if (gateways.linkedin.mode === "profile") {
-      setLinkedinFrom(`${gateways.linkedin.senderName || "Mayank Garg"} (${gateways.linkedin.senderTitle || "Founder & CEO"})`);
+      setLinkedinFrom(`${gateways.linkedin.senderName || "Dig"} (${gateways.linkedin.senderTitle || "Founder & CEO"})`);
       if (gateways.linkedin.senderName) setLinkedinSender(gateways.linkedin.senderName);
     } else if (gateways.linkedin.mode === "system") {
-      setLinkedinFrom("Mayank Garg (Founder & CEO)");
+      setLinkedinFrom("Dig (Founder & CEO)");
     }
 
     setSaveSuccessMsg("✓ Gateway settings saved & applied to current session!");
@@ -2954,7 +2954,7 @@ function DispatchConfirmModal({
                         className="dispatch-input"
                         value={emailSender}
                         onChange={(e) => setEmailSender(e.target.value)}
-                        placeholder="Mayank Garg"
+                        placeholder="Dig"
                       />
                     </label>
                     <label className="dispatch-form-group full-width" style={{ gridColumn: "1 / -1" }}>
@@ -3056,7 +3056,7 @@ function DispatchConfirmModal({
                         className="dispatch-input"
                         value={whatsappSender}
                         onChange={(e) => setWhatsappSender(e.target.value)}
-                        placeholder="Mayank Garg or Dig Bot"
+                        placeholder="Your name or Dig Bot"
                       />
                     </label>
                   </div>
@@ -3139,7 +3139,7 @@ function DispatchConfirmModal({
                         className="dispatch-input"
                         value={linkedinFrom}
                         onChange={(e) => setLinkedinFrom(e.target.value)}
-                        placeholder="Mayank Garg (Founder & CEO)"
+                        placeholder="Dig (Founder & CEO)"
                       />
                     </label>
                     <label className="dispatch-form-group">
@@ -3149,7 +3149,7 @@ function DispatchConfirmModal({
                         className="dispatch-input"
                         value={linkedinSender}
                         onChange={(e) => setLinkedinSender(e.target.value)}
-                        placeholder="Mayank Garg"
+                        placeholder="Dig"
                       />
                     </label>
                   </div>
@@ -3314,7 +3314,7 @@ function DispatchConfirmModal({
                                 type="text"
                                 className="dispatch-input"
                                 value={gateways.email.senderName}
-                                placeholder="Mayank Garg"
+                                placeholder="Dig"
                                 onChange={(e) => setGateways((g) => ({ ...g, email: { ...g.email, senderName: e.target.value } }))}
                               />
                             </label>
@@ -3431,7 +3431,7 @@ function DispatchConfirmModal({
                                 type="text"
                                 className="dispatch-input"
                                 value={gateways.email.senderName}
-                                placeholder="Mayank Garg"
+                                placeholder="Dig"
                                 onChange={(e) => setGateways((g) => ({ ...g, email: { ...g.email, senderName: e.target.value } }))}
                               />
                             </label>
@@ -3477,7 +3477,7 @@ function DispatchConfirmModal({
                                 type="text"
                                 className="dispatch-input"
                                 value={gateways.email.senderName}
-                                placeholder="Mayank Garg"
+                                placeholder="Dig"
                                 onChange={(e) => setGateways((g) => ({ ...g, email: { ...g.email, senderName: e.target.value } }))}
                               />
                             </label>
@@ -3600,7 +3600,7 @@ function DispatchConfirmModal({
                                 type="text"
                                 className="dispatch-input"
                                 value={gateways.whatsapp.senderName}
-                                placeholder="Mayank Garg or Dig AI"
+                                placeholder="Your name or Dig AI"
                                 onChange={(e) => setGateways((g) => ({ ...g, whatsapp: { ...g.whatsapp, senderName: e.target.value } }))}
                               />
                             </label>
@@ -3726,7 +3726,7 @@ function DispatchConfirmModal({
                                 type="url"
                                 className="dispatch-input"
                                 value={gateways.linkedin.profileUrl}
-                                placeholder="https://www.linkedin.com/in/mayank-garg/"
+                                placeholder="https://www.linkedin.com/in/"
                                 onChange={(e) => setGateways((g) => ({ ...g, linkedin: { ...g.linkedin, profileUrl: e.target.value } }))}
                               />
                             </label>
@@ -3736,7 +3736,7 @@ function DispatchConfirmModal({
                                 type="text"
                                 className="dispatch-input"
                                 value={gateways.linkedin.senderName}
-                                placeholder="Mayank Garg"
+                                placeholder="Dig"
                                 onChange={(e) => setGateways((g) => ({ ...g, linkedin: { ...g.linkedin, senderName: e.target.value } }))}
                               />
                             </label>
@@ -3802,7 +3802,7 @@ function DispatchConfirmModal({
                       {gateways.linkedin.mode === "system" && (
                         <div className="utr-demo-box" style={{ background: "var(--sunken)", padding: "12px", borderRadius: "8px" }}>
                           <span className="utr-demo-hint">
-                            ✓ Using Dig&apos;s verified agent profile (<code>Mayank Garg (Founder &amp; CEO)</code>) for partner outreach.
+                            ✓ Using Dig&apos;s verified agent profile (<code>Dig (Founder &amp; CEO)</code>) for partner outreach.
                           </span>
                         </div>
                       )}
@@ -4015,12 +4015,12 @@ function DeliveryReceiptModal({
   };
 
   const emailFrom = customizedDrafts?.email.from || String(emailNode?.config.from || "outreach@dig.ai");
-  const emailSender = customizedDrafts?.email.senderName || String(emailNode?.config.senderName || "Mayank Garg");
+  const emailSender = customizedDrafts?.email.senderName || String(emailNode?.config.senderName || "Dig");
   const emailProvider = customizedDrafts?.email.provider || String(emailNode?.config.provider || "Resend API (api.resend.com)");
   const emailSubject = customizedDrafts?.email.subject || interpolateVal(emailNode?.config.subject || "Partnership Opportunity for {{record.company}}");
   const emailBody = customizedDrafts?.email.body || interpolateVal(
     emailNode?.config.body ||
-      "Hi {{record.name}},\n\nReaching out regarding {{record.company}} — we'd love to connect and share more about collaboration opportunities.\n\nBest regards,\nMayank Garg | Partnerships"
+      "Hi {{record.name}},\n\nReaching out regarding {{record.company}} — we'd love to connect and share more about collaboration opportunities.\n\nBest regards,\nDig | Partnerships"
   );
 
   const whatsappFrom = customizedDrafts?.whatsapp.from || String(whatsappNode?.config.from || "+1 (555) 019-2834 (Verified WABA)");
@@ -4031,8 +4031,8 @@ function DeliveryReceiptModal({
       "Hello {{record.name}}, reaching out to you regarding {{record.company}}. Let us know if you'd be open to a brief chat!"
   );
 
-  const linkedinFrom = customizedDrafts?.linkedin.from || String(linkedinNode?.config.from || "Mayank Garg (Founder & CEO)");
-  const linkedinSender = customizedDrafts?.linkedin.senderName || String(linkedinNode?.config.senderName || "Mayank Garg");
+  const linkedinFrom = customizedDrafts?.linkedin.from || String(linkedinNode?.config.from || "Dig (Founder & CEO)");
+  const linkedinSender = customizedDrafts?.linkedin.senderName || String(linkedinNode?.config.senderName || "Dig");
   const linkedinProvider = customizedDrafts?.linkedin.provider || String(linkedinNode?.config.provider || "LinkedIn Official Partner API");
   const linkedinBody = customizedDrafts?.linkedin.body || interpolateVal(
     linkedinNode?.config.body ||

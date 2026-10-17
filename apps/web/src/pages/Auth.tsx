@@ -76,12 +76,12 @@ export function Auth({ mode }: { mode: "login" | "signup" }) {
         {signup && (
           <>
             <label htmlFor="name">Name</label>
-            <input id="name" name="name" autoComplete="name" placeholder="Ashima Arora" value={values.name} onChange={set("name")} aria-invalid={Boolean(errors.name)} />
+            <input id="name" name="name" autoComplete="name" placeholder="Your name" value={values.name} onChange={set("name")} aria-invalid={Boolean(errors.name)} />
             {fieldError("name")}
           </>
         )}
         <label htmlFor="email">Email</label>
-        <input id="email" name="email" type="email" autoComplete="email" placeholder="you@geekroom.in" value={values.email} onChange={set("email")} aria-invalid={Boolean(errors.email)} />
+        <input id="email" name="email" type="email" autoComplete="email" placeholder="you@example.com" value={values.email} onChange={set("email")} aria-invalid={Boolean(errors.email)} />
         {fieldError("email")}
         <label htmlFor="password">Password</label>
         <PasswordInput

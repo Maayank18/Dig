@@ -68,15 +68,15 @@ export function workflowTemplates(jobId = ""): WorkflowTemplate[] {
           node("email-pitch", "email", "Email Pitch Drafter", 70, {
             kind: "email",
             from: "outreach@dig.ai",
-            senderName: "Mayank Garg",
+            senderName: "Dig",
             provider: "Resend API (api.resend.com)",
             to: "{{record.email}}",
             subject: "Partnership Opportunity for {{record.company}}",
-            body: "Hi {{record.name}},\n\nReaching out regarding {{record.company}} — we'd love to connect and share more about collaboration opportunities.\n\nBest regards,\nMayank Garg | Partnerships",
+            body: "Hi {{record.name}},\n\nReaching out regarding {{record.company}} — we'd love to connect and share more about collaboration opportunities.\n\nBest regards,\nDig | Partnerships",
           }, 1200),
           node("linkedin-pitch", "linkedin", "LinkedIn Pitch Drafter", 220, {
             kind: "linkedin",
-            from: "Mayank Garg (Founder & CEO)",
+            from: "Dig (Founder & CEO)",
             provider: "LinkedIn Official Partner API",
             to: "{{record.linkedin}}",
             subject: "Connecting with {{record.name}}",

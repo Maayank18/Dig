@@ -26,6 +26,7 @@ import { labelOf, DigDb } from "./db.js";
 import { chatJson, llmLanes } from "./collect-live.js";
 import { savedHunterContacts } from "./hunter.js";
 import { env } from "./env.js";
+import { tinyfishStatus } from "./tinyfish.js";
 import { parseQuery } from "./intent-llm.js";
 import { renderReport } from "./report.js";
 import { executeJob, isRunning, requestCancel, subscribe } from "./runner.js";
@@ -154,7 +155,13 @@ async function main() {
   });
 
   app.get("/api/health", (req, res) => {
-    ok(res, req, { ok: true, llm: env.llmEnabled ? env.llmProvider : "off", search: env.tavilyKey ? "tavily" : "missing", database: "sqlite" });
+    ok(res, req, {
+      ok: true,
+      llm: env.llmEnabled ? env.llmProvider : "off",
+      search: env.tavilyKey ? "tavily" : "missing",
+      tinyfish: tinyfishStatus(),
+      database: "sqlite",
+    });
   });
 
   // ---------------------------------------------------------------------------

@@ -60,6 +60,8 @@ export const env = {
     .map((model) => model.trim())
     .filter(Boolean),
   tavilyKey: process.env.TAVILY_API_KEY ?? process.env.SEARCH_API_KEY ?? "",
+  tinyfishKey: process.env.TINYFISH_API_KEY ?? "",
+  tinyfishBaseUrl: (process.env.TINYFISH_BASE_URL ?? "https://agent.tinyfish.ai").replace(/\/$/, ""),
   // Results kept per run, for every intent. Sponsor/lead contact lookups (one Tavily credit each, cached 7 days)
   // follow the same cap.
   resultCap: Number(process.env.RESULT_CAP ?? 120),

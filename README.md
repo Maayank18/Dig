@@ -28,7 +28,7 @@ Sponsors, judges, speakers — found, sourced, and organized into one space, so 
 - [Getting started](#getting-started)
 - [Prototype notes](#prototype-notes)
 - [Vision](#vision)
-- [The team](#the-team)
+- [The build](#the-build)
 
 
 ## The problem
@@ -96,7 +96,7 @@ The full list is in the [feature guide](Features.md).
 `React` · `Vite` · `Tailwind CSS` · `TanStack Query` · `TanStack Table` · `React Router` · `jsPDF`
 
 **Research pipeline**
-`Tavily` (search) · `Groq` (extraction & reasoning) · `Hunter.io` (work emails) · `GitHub API` (profiles) · `Jev via OpenRouter` (trust decisions)
+`Tavily` (search) · `Groq` (extraction & reasoning) · `Hunter.io` (work emails) · `GitHub API` (profiles) · `Jev via OpenRouter` (trust decisions) · `TinyFish` (optional browser agent)
 
 **Testing**
 `Vitest`
@@ -163,6 +163,7 @@ cp .env.example .env
 #   HUNTER_MAX_CALLS_PER_RUN=8
 #   GITHUB_TOKEN=...                      (GitHub profile lookups)
 #   JEV_API_KEY=...                       (trust decisions — an OpenRouter key)
+#   TINYFISH_API_KEY=...                  (optional browser agent — agent.tinyfish.ai)
 #   ENRICHMENT_TIMEOUT_MS=60000
 
 npm run dev
@@ -202,12 +203,6 @@ Same pipeline, same grounding, same trust — just pointed at whatever you're di
 
 
 
-## The team
+## The build
 
-Built by **Mayank** and **Ashima**, four days, one monorepo, and more coffee breaks than either of us will admit to. The full build, failure by failure, is in the [Dev Log](https://dig-ai.vercel.app/dev-log).
-
-<div align="center">
-
-made with ❤️ at Code Cubicle 6.0
-
-</div>
+Built in four days, one monorepo, and more coffee breaks than planned. The full build, failure by failure, is in the [Dev Log](https://dig-ai.vercel.app/dev-log).

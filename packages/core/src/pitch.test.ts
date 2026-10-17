@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { cleanPitch, pitchSupported, pitchUserMessage, recipientFacts } from "./pitch.js";
 
-const sender = { name: "Ashima Arora", role: "Organizer", organization: "Code Cubicle", ask: "" };
+const sender = { name: "Event Organizer", role: "Organizer", organization: "Northstar", ask: "" };
 
 describe("pitchSupported", () => {
   it("offers a pitch for sponsors, judges and leads only", () => {
@@ -18,13 +18,13 @@ describe("pitchUserMessage", () => {
     const message = pitchUserMessage({
       intent: "JUDGE_LOOKUP",
       recipient: { person_name: "Alex Kuefler", affiliation: "Waymo", expertise: "reinforcement learning", email: "", source_url: "https://x" },
-      event: { name: "Code Cubicle 7.0", date: "12 Nov", description: "A 36-hour student hackathon." },
+      event: { name: "Northstar Hackathon", date: "12 Nov", description: "A 36-hour student hackathon." },
       sender,
     });
     expect(message).toContain("Invite them to judge, mentor or speak");
     expect(message).toContain("expertise: reinforcement learning");
-    expect(message).toContain("- name: Code Cubicle 7.0");
-    expect(message).toContain("- name: Ashima Arora");
+    expect(message).toContain("- name: Northstar Hackathon");
+    expect(message).toContain("- name: Event Organizer");
     expect(message).not.toContain("source_url");
     expect(message).not.toContain("what we are asking");
   });
@@ -43,12 +43,12 @@ describe("recipientFacts", () => {
 });
 
 describe("cleanPitch", () => {
-  const body = "Hi Alex,\n\n\n\nI'm writing from Code Cubicle about judging our hackathon in November.";
+  const body = "Hi Alex,\n\n\n\nI'm writing from Northstar about judging our hackathon in November.";
 
   it("tidies a good draft", () => {
-    expect(cleanPitch({ subject: " Judging  Code Cubicle ", body })).toEqual({
-      subject: "Judging Code Cubicle",
-      body: "Hi Alex,\n\nI'm writing from Code Cubicle about judging our hackathon in November.",
+    expect(cleanPitch({ subject: " Judging  Northstar ", body })).toEqual({
+      subject: "Judging Northstar",
+      body: "Hi Alex,\n\nI'm writing from Northstar about judging our hackathon in November.",
     });
   });
 
